@@ -23,7 +23,7 @@ Local Setup Steps:
 |Contract       | Addresss                                                                                                            | Notes   |
 |:-------------:|:-------------------------------------------------------------------------------------------------------------------:|-------|
 |TELO            |[0x383518188c0c6d7730d91b2c03a03c837814a899](https://etherscan.io/address/0x383518188c0c6d7730d91b2c03a03c837814a899)| Main Token Contract|
-|sTELO           |[0x31932e6e45012476ba3a3a4953cba62aee77fbbe](https://etherscan.io/address/0x31932e6e45012476ba3a3a4953cba62aee77fbbe)| Staked Ohm|
+|sTELO           |[0x31932e6e45012476ba3a3a4953cba62aee77fbbe](https://etherscan.io/address/0x31932e6e45012476ba3a3a4953cba62aee77fbbe)| Staked TELO|
 |Treasury       |[0x31F8Cc382c9898b273eff4e0b7626a6987C846E8](https://etherscan.io/address/0x31F8Cc382c9898b273eff4e0b7626a6987C846E8)| Telesto Treasury holds all the assets        |
 |TelestoStaking |[0xfd31c7d00ca47653c6ce64af53c1571f9c36566a](https://etherscan.io/address/0xfd31c7d00ca47653c6ce64af53c1571f9c36566a)| Main Staking contract responsible for calling rebases every 2200 blocks|
 |StakingHelper  |[0xc8c436271f9a6f10a5b80c8b8ed7d0e8f37a612d](https://etherscan.io/address/0xc8c436271f9a6f10a5b80c8b8ed7d0e8f37a612d)| Helper Contract to Stake with 0 warmup |
