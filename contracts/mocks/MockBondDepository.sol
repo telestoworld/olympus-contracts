@@ -848,7 +848,7 @@ interface IStakingHelper {
   function stake(uint256 _amount, address _recipient) external;
 }
 
-contract MockOlympusBondDepository is Ownable {
+contract MockTelestoBondDepository is Ownable {
   using FixedPoint for *;
   using SafeERC20 for IERC20;
   using SafeMath for uint256;
@@ -880,9 +880,9 @@ contract MockOlympusBondDepository is Ownable {
 
   /* ======== STATE VARIABLES ======== */
 
-  address public immutable OHM; // token given as payment for bond
+  address public immutable TELO; // token given as payment for bond
   address public immutable principle; // token used to create bond
-  address public immutable treasury; // mints OHM when receives principle
+  address public immutable treasury; // mints TELO when receives principle
   address public immutable DAO; // receives profit share from bond
 
   bool public immutable isLiquidityBond; // LP and Reserve bonds are treated slightly different
@@ -914,7 +914,7 @@ contract MockOlympusBondDepository is Ownable {
 
   // Info for bond holder
   struct Bond {
-    uint256 payout; // OHM remaining to be paid
+    uint256 payout; // TELO remaining to be paid
     uint256 vesting; // Blocks left to vest
     uint256 lastBlock; // Last interaction
     uint256 pricePaid; // In DAI, for front end viewing
@@ -932,14 +932,14 @@ contract MockOlympusBondDepository is Ownable {
   /* ======== INITIALIZATION ======== */
 
   constructor(
-    address _OHM,
+    address _TELO,
     address _principle,
     address _treasury,
     address _DAO,
     address _bondCalculator
   ) {
-    require(_OHM != address(0));
-    OHM = _OHM;
+    require(_TELO != address(0));
+    TELO = _TELO;
     require(_principle != address(0));
     principle = _principle;
     require(_treasury != address(0));
@@ -1089,7 +1089,7 @@ contract MockOlympusBondDepository is Ownable {
     uint256 value = ITreasury(treasury).valueOfToken(principle, _amount);
     uint256 payout = payoutFor(value); // payout to bonder is computed
 
-    require(payout >= 10000000, "Bond too small"); // must be > 0.01 OHM ( underflow protection )
+    require(payout >= 10000000, "Bond too small"); // must be > 0.01 TELO ( underflow protection )
     require(payout <= maxPayout(), "Bond too large"); // size protection because there is no slippage
 
     // profits are calculated
@@ -1099,7 +1099,7 @@ contract MockOlympusBondDepository is Ownable {
     /**
             principle is transferred in
             approved and
-            deposited into the treasury, returning (_amount - profit) OHM
+            deposited into the treasury, returning (_amount - profit) TELO
          */
     IERC20(principle).safeTransferFrom(msg.sender, address(this), _amount);
     IERC20(principle).approve(address(treasury), _amount);
@@ -1107,7 +1107,7 @@ contract MockOlympusBondDepository is Ownable {
 
     if (fee != 0) {
       // fee is transferred to dao
-      IERC20(OHM).safeTransfer(DAO, fee);
+      IERC20(TELO).safeTransfer(DAO, fee);
     }
 
     // total debt is increased
@@ -1182,15 +1182,15 @@ contract MockOlympusBondDepository is Ownable {
   ) internal returns (uint256) {
     if (!_stake) {
       // if user does not want to stake
-      IERC20(OHM).transfer(_recipient, _amount); // send payout
+      IERC20(TELO).transfer(_recipient, _amount); // send payout
     } else {
       // if user wants to stake
       if (useHelper) {
         // use if staking warmup is 0
-        IERC20(OHM).approve(stakingHelper, _amount);
+        IERC20(TELO).approve(stakingHelper, _amount);
         IStakingHelper(stakingHelper).stake(_amount, _recipient);
       } else {
-        IERC20(OHM).approve(staking, _amount);
+        IERC20(TELO).approve(staking, _amount);
         IStaking(staking).stake(_amount, _recipient);
       }
     }
@@ -1240,7 +1240,7 @@ contract MockOlympusBondDepository is Ownable {
    *  @return uint
    */
   function maxPayout() public view returns (uint256) {
-    return IERC20(OHM).totalSupply().mul(terms.maxPayout).div(100000);
+    return IERC20(TELO).totalSupply().mul(terms.maxPayout).div(100000);
   }
 
   /**
@@ -1291,11 +1291,11 @@ contract MockOlympusBondDepository is Ownable {
   }
 
   /**
-   *  @notice calculate current ratio of debt to OHM supply
+   *  @notice calculate current ratio of debt to TELO supply
    *  @return debtRatio_ uint
    */
   function debtRatio() public view returns (uint256 debtRatio_) {
-    uint256 supply = IERC20(OHM).totalSupply();
+    uint256 supply = IERC20(TELO).totalSupply();
     debtRatio_ = FixedPoint
       .fraction(currentDebt().mul(1e9), supply)
       .decode112with18()
@@ -1359,7 +1359,7 @@ contract MockOlympusBondDepository is Ownable {
   }
 
   /**
-   *  @notice calculate amount of OHM available for claim by depositor
+   *  @notice calculate amount of TELO available for claim by depositor
    *  @param _depositor address
    *  @return pendingPayout_ uint
    */
@@ -1381,11 +1381,11 @@ contract MockOlympusBondDepository is Ownable {
   /* ======= AUXILLIARY ======= */
 
   /**
-   *  @notice allow anyone to send lost tokens (excluding principle or OHM) to the DAO
+   *  @notice allow anyone to send lost tokens (excluding principle or TELO) to the DAO
    *  @return bool
    */
   function recoverLostToken(address _token) external returns (bool) {
-    require(_token != OHM);
+    require(_token != TELO);
     require(_token != principle);
     IERC20(_token).safeTransfer(DAO, IERC20(_token).balanceOf(address(this)));
     return true;

@@ -29,7 +29,7 @@ describe('BondingFacilitator', () => {
 
         [deployer, addr1] = await ethers.getSigners();
 
-        OLY = await ethers.getContractFactory('OlympusERC20TOken');
+        OLY = await ethers.getContractFactory('TelestoERC20TOken');
         oly = await OLY.deploy();
 
         MockBonding = await ethers.getContractFactory('MockBonding');
@@ -38,7 +38,7 @@ describe('BondingFacilitator', () => {
         MockPair = await ethers.getContractFactory('TestToken1');
         mockPair = await MockPair.deploy();
 
-        BondingCalcContract = await ethers.getContractFactory('OlympusBondingCalculator');
+        BondingCalcContract = await ethers.getContractFactory('TelestoBondingCalculator');
         bondingCalcContract = await BondingCalcContract.deploy();
 
         Treasury = await ethers.getContractFactory('MockTreasury');
