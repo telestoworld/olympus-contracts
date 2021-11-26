@@ -917,7 +917,7 @@ contract MockTelestoBondDepository is Ownable {
     uint256 payout; // TELO remaining to be paid
     uint256 vesting; // Blocks left to vest
     uint256 lastBlock; // Last interaction
-    uint256 pricePaid; // In DAI, for front end viewing
+    uint256 pricePaid; // In CUSD, for front end viewing
   }
 
   // Info for incremental adjustments to control variable
@@ -1277,7 +1277,7 @@ contract MockTelestoBondDepository is Ownable {
   }
 
   /**
-   *  @notice converts bond price to DAI value
+   *  @notice converts bond price to CUSD value
    *  @return price_ uint
    */
   function bondPriceInUSD() public view returns (uint256 price_) {

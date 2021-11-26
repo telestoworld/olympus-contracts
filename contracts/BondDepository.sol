@@ -663,7 +663,7 @@ contract TelestoBondDepository is Ownable {
         uint payout; // TELO remaining to be paid
         uint vesting; // Blocks left to vest
         uint lastBlock; // Last interaction
-        uint pricePaid; // In DAI, for front end viewing
+        uint pricePaid; // In CUSD, for front end viewing
     }
 
     // Info for incremental adjustments to control variable 
@@ -1004,7 +1004,7 @@ contract TelestoBondDepository is Ownable {
     }
 
     /**
-     *  @notice converts bond price to DAI value
+     *  @notice converts bond price to CUSD value
      *  @return price_ uint
      */
     function bondPriceInUSD() public view returns ( uint price_ ) {

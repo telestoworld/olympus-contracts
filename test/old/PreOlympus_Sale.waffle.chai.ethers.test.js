@@ -28,8 +28,8 @@
 //     let PreTelestoSaleContract;
 //     let sale;
 
-//     let DAITokenContract;
-//     let dai;
+//     let CUSDTokenContract;
+//     let cUsd;
 
 //     // let WBTCTokenContract;
 //     // let wbtc;
@@ -41,7 +41,7 @@
 //     // let router;
 
 //     // let UniswapV2Pair;
-//     // let daitEthPairl
+//     // let cUsdtEthPairl
 //     // let ethWBTCPair;
 
 //     beforeEach(
@@ -63,13 +63,13 @@
 //         // await poly.deployed();
 //         console.log( "Test::PreeTelestoSale:beforeEach:05 PreTelestoToken address is %s,", poly.address );
 
-//         console.log( "Test::PreeTelestoSale::beforeEach:06 Loading DAI." );
-//         DAITokenContract = await ethers.getContractFactory("DAI");
+//         console.log( "Test::PreeTelestoSale::beforeEach:06 Loading CUSD." );
+//         CUSDTokenContract = await ethers.getContractFactory("CUSD");
 
-//         console.log( "Test::PreeTelestoSale::beforeEach:07 Deploying DAI." );
-//         dai = await DAITokenContract.connect( deployer ).deploy( 1 );
-//         await dai.deployed();
-//         console.log( "Test::PreeTelestoSale:beforeEach:08 DAI address is %s,", dai.address );
+//         console.log( "Test::PreeTelestoSale::beforeEach:07 Deploying CUSD." );
+//         cUsd = await CUSDTokenContract.connect( deployer ).deploy( 1 );
+//         await cUsd.deployed();
+//         console.log( "Test::PreeTelestoSale:beforeEach:08 CUSD address is %s,", cUsd.address );
 
         
 //         console.log( "Test::PreeTelestoSale::beforeEach:09 Loading PreTelestoSales." );
@@ -82,10 +82,10 @@
 
         
 //         console.Console( "Test::PreeTelestoSale::beforeEach:12 Initializing OLYIntrinsicCalculator." );
-//         await sale.initialize( poly.address, dai.address, 100, saleProceeds.address );
+//         await sale.initialize( poly.address, cUsd.address, 100, saleProceeds.address );
 
-//         console.Console( "Test::PreeTelestoSale::beforeEach:13 Minting DAI." );
-//         dai.connect(deployer).mint( buyer1.address, ethers.utils.parseUnits( String( MILLION ), "ether" ) );
+//         console.Console( "Test::PreeTelestoSale::beforeEach:13 Minting CUSD." );
+//         cUsd.connect(deployer).mint( buyer1.address, ethers.utils.parseUnits( String( MILLION ), "ether" ) );
 
 //         console.Console( "Test::PreeTelestoSale::beforeEach:13 Minting pOLY." );
 //         poly.connect(deployer).mint( sale.address, ethers.utils.parseUnits( String( BILLION ), "ether" ) );
@@ -97,66 +97,66 @@
 //       "Sale",
 //       function () {
 //         it( 
-//           "DAIPurchase",
+//           "CUSDPurchase",
 //           async function() {
 
-//             console.log("Test::PreeTelestoSale::Sale::DAIPurchase:01 buyer1 dai balanceOf.");
-//             expect( await dai.connect(deployer).balanceOf( buyer1.address ) )
+//             console.log("Test::PreeTelestoSale::Sale::CUSDPurchase:01 buyer1 cUsd balanceOf.");
+//             expect( await cUsd.connect(deployer).balanceOf( buyer1.address ) )
 //               .to.equal( String( ethers.utils.parseUnits( String( MILLION ), "ether" ) ) );
 
-//             console.log("Test::PreeTelestoSale::Sale::DAIPurchase:02 sale poly balanceOf.");
+//             console.log("Test::PreeTelestoSale::Sale::CUSDPurchase:02 sale poly balanceOf.");
 //             expect( await poly.connect(deployer).balanceOf( sale.address ) )
 //               .to.equal( String( ethers.utils.parseUnits( String( BILLION ), "ether" ) ) );
 
 //             await sale.connect(deployer).approveBuyer( buyer1.address );
 
-//               await expect( dai.connect(buyer1).approve( sale.address, ethers.utils.parseUnits( String( MILLION ), "ether" ) ) )
-//               .to.emit( dai, "Approval" )
+//               await expect( cUsd.connect(buyer1).approve( sale.address, ethers.utils.parseUnits( String( MILLION ), "ether" ) ) )
+//               .to.emit( cUsd, "Approval" )
 //               .withArgs( buyer1.address, sale.address, ethers.utils.parseUnits( String( MILLION ), "ether" ) );
 
-//             expect( await dai.connect(buyer1).allowance( buyer1.address, sale.address ) )
+//             expect( await cUsd.connect(buyer1).allowance( buyer1.address, sale.address ) )
 //               .to.equal( ethers.utils.parseUnits( String( MILLION ), "ether" ) );
 
 //             // await expect( sale.connect(buyer1).buyPOly( ethers.utils.parseUnits( String( 100 ), "ether" ) ) )
 //             //   .to.be.revertedWith( "Sale is not active." );
 
-//               // expect( await dai.connect(buyer1).allowance( buyer1.address, sale.address ) )
+//               // expect( await cUsd.connect(buyer1).allowance( buyer1.address, sale.address ) )
 //               // .to.equal( ethers.utils.parseUnits( String( 100 ), "ether" ) );
 
 //             // await sale.connect(deployer).startSale();
             
-//             console.log("Test::PreeTelestoSale::Sale::DAIPurchase:03 Approve sale to sell.");
+//             console.log("Test::PreeTelestoSale::Sale::CUSDPurchase:03 Approve sale to sell.");
 //             await poly.connect(deployer).addApprovedSeller( sale.address );
 
-//             console.log("Test::PreeTelestoSale::Sale::DAIPurchase:04 sale is approvedSeller.");
+//             console.log("Test::PreeTelestoSale::Sale::CUSDPurchase:04 sale is approvedSeller.");
 //             expect( await poly.isApprovedSeller( sale.address ) ).to.equal( true );
 
-//             // await expect( dai.connect(buyer1).approve( sale.address, ethers.utils.parseUnits( String( 100 ), "ether" ) ) )
-//             //   .to.emit( dai, "Approval" )
+//             // await expect( cUsd.connect(buyer1).approve( sale.address, ethers.utils.parseUnits( String( 100 ), "ether" ) ) )
+//             //   .to.emit( cUsd, "Approval" )
 //             //   .withArgs( buyer1.address, sale.address, ethers.utils.parseUnits( String( 100 ), "ether" ) );
 
-//             // expect( await dai.connect(buyer1).allowance( buyer1.address, sale.address ) )
+//             // expect( await cUsd.connect(buyer1).allowance( buyer1.address, sale.address ) )
 //             //   .to.equal( ethers.utils.parseUnits( String( 100 ), "ether" ) );
 
 //             await expect( () => sale.connect(buyer1).buyPOly( ethers.utils.parseUnits( String( MILLION ), "ether" ) ) )
 //               .to.changeTokenBalance( poly, buyer1, ethers.utils.parseUnits( String( (MILLION * 100) ), "ether" ) );
 
             
-//               console.log("Test::PreeTelestoSale::Sale::DAIPurchase:05 buyer1 dai balanceOf.");
-//               expect( await dai.connect(deployer).balanceOf( buyer1.address ) )
+//               console.log("Test::PreeTelestoSale::Sale::CUSDPurchase:05 buyer1 cUsd balanceOf.");
+//               expect( await cUsd.connect(deployer).balanceOf( buyer1.address ) )
 //                 .to.equal( String( ethers.utils.parseUnits( String( 0 ), "ether" ) ) );
 
 //             // console.log("Test::PreTelestoTokenDeployment::DeploymentSuccess: buyer1 balanceOf.");
 //             // expect( await poly.connect(buyer1).balanceOf(buyer1.address) ).to.equal( String( ethers.utils.parseUnits( String( 1000 ), "ether" ) ) );
             
 //             // console.log("Test::PreTelestoTokenDeployment::DeploymentSuccess: buyer1 balanceOf.");
-//             // expect( await dai.connect(buyer1).balanceOf(buyer1.address) ).to.equal( String( ethers.utils.parseUnits( String( 900 ), "ether" ) ) );
+//             // expect( await cUsd.connect(buyer1).balanceOf(buyer1.address) ).to.equal( String( ethers.utils.parseUnits( String( 900 ), "ether" ) ) );
 
 //             /*****************************************************************************************************************************************************/
 
 //             // poly.connect(deployer).transfer( sale.address, ethers.utils.parseUnits( String( 1000000000 ), "ether" ) );
 
-//             // dai.connect(deployer).transfer( buyer1.address, ethers.utils.parseUnits( String( 1000 ), "ether" ) );
+//             // cUsd.connect(deployer).transfer( buyer1.address, ethers.utils.parseUnits( String( 1000 ), "ether" ) );
 
 //             /******************************************************************************************************************************/
 

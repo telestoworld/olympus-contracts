@@ -15,8 +15,8 @@
 //     let buyer1;
 //     let buyer2;
 
-//     let DAITokenContract;
-//     let dai;
+//     let CUSDTokenContract;
+//     let cUsd;
 
 //     // Contracts
 //     let TelestoERC20TOkenContract;
@@ -30,13 +30,13 @@
 //           buyer2
 //         ] = await ethers.getSigners();
 
-//         console.log( "Test::TelestoERC20TOken::beforeEach:01 Loading DAI." );
-//         DAITokenContract = await ethers.getContractFactory("DAI");
+//         console.log( "Test::TelestoERC20TOken::beforeEach:01 Loading CUSD." );
+//         CUSDTokenContract = await ethers.getContractFactory("CUSD");
         
-//         console.log( "Test::TelestoERC20TOken::beforeEach:02 Deploying DAI." );
-//         dai = await DAITokenContract.connect( deployer ).deploy( 1 );
-//         // await dai.deployed();
-//         console.log( "Test::PreeTelestoSale:beforeEach:03 DAI address is %s,", dai.address );
+//         console.log( "Test::TelestoERC20TOken::beforeEach:02 Deploying CUSD." );
+//         cUsd = await CUSDTokenContract.connect( deployer ).deploy( 1 );
+//         // await cUsd.deployed();
+//         console.log( "Test::PreeTelestoSale:beforeEach:03 CUSD address is %s,", cUsd.address );
 
 //         console.log( "Test::TelestoERC20TOken::beforeEach:04 Loading OLY." );
 //         TelestoERC20TOkenContract = await ethers.getContractFactory("TelestoERC20TOken");

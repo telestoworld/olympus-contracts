@@ -358,22 +358,22 @@ contract MockTelestoTreasury is Ownable {
 
   constructor(
     address _TELO,
-    address _DAI,
-    address _Frax,
-    //address _TELODAI,
+    address _CUSD,
+    address _CEuro,
+    //address _TELOCUSD,
     uint256 _blocksNeededForQueue
   ) {
     require(_TELO != address(0));
     TELO = _TELO;
 
-    isReserveToken[_DAI] = true;
-    reserveTokens.push(_DAI);
+    isReserveToken[_CUSD] = true;
+    reserveTokens.push(_CUSD);
 
-    isReserveToken[_Frax] = true;
-    reserveTokens.push(_Frax);
+    isReserveToken[_CEuro] = true;
+    reserveTokens.push(_CEuro);
 
-    // isLiquidityToken[ _TELODAI ] = true;
-    // liquidityTokens.push( _TELODAI );
+    // isLiquidityToken[ _TELOCUSD ] = true;
+    // liquidityTokens.push( _TELOCUSD );
 
     blocksNeededForQueue = _blocksNeededForQueue;
   }

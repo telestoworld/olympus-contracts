@@ -442,7 +442,7 @@ contract TelestoCVXBondDepository is Ownable {
         uint payout; // TELO remaining to be paid
         uint vesting; // Blocks left to vest
         uint lastBlock; // Last interaction
-        uint pricePaid; // In DAI, for front end viewing
+        uint pricePaid; // In CUSD, for front end viewing
     }
 
     // Info for incremental adjustments to control variable 

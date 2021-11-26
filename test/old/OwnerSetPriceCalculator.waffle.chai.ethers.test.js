@@ -28,8 +28,8 @@
 // //     let PreTelestoSaleContract;
 // //     let sale;
 
-// //     let DAITokenContract;
-// //     let dai;
+// //     let CUSDTokenContract;
+// //     let cUsd;
 
 // //     // let WBTCTokenContract;
 // //     // let wbtc;
@@ -41,7 +41,7 @@
 // //     // let router;
 
 // //     // let UniswapV2Pair;
-// //     // let daitEthPairl
+// //     // let cUsdtEthPairl
 // //     // let ethWBTCPair;
 
 //     beforeEach(
@@ -67,14 +67,14 @@
 //         tt2 = await TestToken2Contract.connect( deployer ).deploy();
 //         await tt2.deployed();
 
-// //         DAITokenContract = await ethers.getContractFactory("PreTelestoToken");
+// //         CUSDTokenContract = await ethers.getContractFactory("PreTelestoToken");
 // //         //Add check for events
-// //         dai = await DAITokenContract.connect( deployer ).deploy();
-// //         await dai.deployed();
+// //         cUsd = await CUSDTokenContract.connect( deployer ).deploy();
+// //         await cUsd.deployed();
 
 // //         //Add check for events
-// //         dai = await DAITokenContract.connect( deployer ).deploy();
-// //         await dai.deployed();
+// //         cUsd = await CUSDTokenContract.connect( deployer ).deploy();
+// //         await cUsd.deployed();
 
 // //         PreTelestoSaleContract = await ethers.getContractFactory("PreTelestoSales");
 // //         //Add check for events

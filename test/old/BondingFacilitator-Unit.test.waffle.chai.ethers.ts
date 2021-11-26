@@ -22,8 +22,8 @@
 //       mockBonding,
 //       OLY,
 //       oly,
-//       DAI,
-//       dai
+//       CUSD,
+//       cUsd
 
 //     beforeEach(async () => {
 

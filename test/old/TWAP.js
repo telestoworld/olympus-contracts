@@ -664,7 +664,7 @@
 
 
 //   describe('Uniswap', () => {
-//     let Weth, weth, Facotry, factory, Router, router, Token, token, Dai, dai, Oracle, oracle, pairAddress, pair, owner, addr1;
+//     let Weth, weth, Facotry, factory, Router, router, Token, token, Dai, cUsd, Oracle, oracle, pairAddress, pair, owner, addr1;
 
 //     const provider = new MockProvider({
 //         hardfork: 'istanbul',
@@ -687,24 +687,24 @@
 //         Token = await ethers.getContractFactory('TestToken');
 //         token = await Token.deploy();
     
-//         Dai = await ethers.getContractFactory('DAI');
-//         dai = await Dai.deploy(99);      
-//         await dai.mint(owner.address, 10000000);
-//         await dai.mint(addr1.address, 10000000);
+//         Dai = await ethers.getContractFactory('CUSD');
+//         cUsd = await Dai.deploy(99);      
+//         await cUsd.mint(owner.address, 10000000);
+//         await cUsd.mint(addr1.address, 10000000);
 
 //         Oracle = await ethers.getContractFactory('ExampleSlidingWindowOracle');
 //         oracle = await Oracle.deploy(factory.address, 24, 2);
     
-//         await factory.createPair(token.address, dai.address);
+//         await factory.createPair(token.address, cUsd.address);
         
-//         pairAddress = await factory.getPair(dai.address, token.address);
+//         pairAddress = await factory.getPair(cUsd.address, token.address);
 //         pair = new Contract(pairAddress, PairABI, provider).connect(owner);
         
 //     });
     
 //     describe('Testing', () => {
 //         it('Should give balances to users', async () => {
-//             console.log((await dai.balanceOf(owner.address)).toString());
+//             console.log((await cUsd.balanceOf(owner.address)).toString());
 //             console.log((await token.balanceOf(owner.address)).toString());
 
 //         });
@@ -712,13 +712,13 @@
 //         it('Should get the pair', async () => {
             
 //             // Still not working, does not pair as contract
-//             await router.addLiquidity(dai.address, token.address, 2000, 2000, 0, 0, owner.address, 9999999999);
+//             await router.addLiquidity(cUsd.address, token.address, 2000, 2000, 0, 0, owner.address, 9999999999);
 
 //             console.log(pair);            
 //             console.log(await pair.token1());       
 //             console.log(await pair.token0()); 
 //             console.log(token.address);
-//             console.log(dai.address);  
+//             console.log(cUsd.address);  
             
 //             console.log((await pair.getReserves()).toString());
 
@@ -726,17 +726,17 @@
 
 //             console.log(await router.factory());
 
-//             //await router.addLiquidity(dai.address, token.address, 2000, 2000, 0, 0, owner.address, 9999999999);
+//             //await router.addLiquidity(cUsd.address, token.address, 2000, 2000, 0, 0, owner.address, 9999999999);
 
-//             //await oracle.update(token.address, dai.address);
-//             //await dai.transfer(pairAddress, 1001);
+//             //await oracle.update(token.address, cUsd.address);
+//             //await cUsd.transfer(pairAddress, 1001);
 //             //await token.transfer(pairAddress, 1001);    
 
 //             //await pair.mint(owner.address);
             
 //             //console.log('Account balance: ' + (await pair.balanceOf(owner.address)).toString());
 
-//             //await dai.connect(addr1).transfer(pairAddress, 10000);
+//             //await cUsd.connect(addr1).transfer(pairAddress, 10000);
 //             //wait token.connect(addr1).transfer(pairAddress, 10000);
 
 //             //await pair.connect(addr1).mint(addr1.address);

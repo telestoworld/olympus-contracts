@@ -12,8 +12,8 @@ describe('OlySaleNew', () => {
         trader,
         OLY,
         oly,
-        DAI,
-        dai,
+        CUSD,
+        cUsd,
         Sale,
         sale,
         deployer,
@@ -25,8 +25,8 @@ describe('OlySaleNew', () => {
         OLY = await ethers.getContractFactory('TelestoERC20TOken');
         oly = await OLY.deploy();
 
-        DAI = await ethers.getContractFactory('DAI');
-        dai = await DAI.deploy(9);
+        CUSD = await ethers.getContractFactory('CUSD');
+        cUsd = await CUSD.deploy(9);
 
         Treasury = await ethers.getContractFactory('MockTreasury');
         treasury = await Treasury.deploy();
@@ -62,15 +62,15 @@ describe('OlySaleNew', () => {
     describe('listToken()', () => {
 
         it('should allow to list OLY as token to sell', async () => {
-            await sale.listToken(oly.address, dai.address, trader.address, deployer.address, deployer.address);
+            await sale.listToken(oly.address, cUsd.address, trader.address, deployer.address, deployer.address);
         });
 
-        it('should allow to list DAI as token to sell', async () => {
-            await sale.listToken(dai.address, oly.address, trader.address, deployer.address, deployer.address);
+        it('should allow to list CUSD as token to sell', async () => {
+            await sale.listToken(cUsd.address, oly.address, trader.address, deployer.address, deployer.address);
         });
 
         it('should NOT allow non owner address to call function', async () => {
-            await expect(sale.connect(addr1).listToken(dai.address, oly.address, trader.address, deployer.address, deployer.address))
+            await expect(sale.connect(addr1).listToken(cUsd.address, oly.address, trader.address, deployer.address, deployer.address))
             .to.be.revertedWith('');
         });
     });

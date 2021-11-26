@@ -28,17 +28,17 @@ async function main() {
     // Ethereum 0 address, used when toggling changes in treasury
     const zeroAddress = '0x0000000000000000000000000000000000000000';
 
-    // Large number for approval for Frax and DAI
+    // Large number for approval for CEuro and CUSD
     const largeApproval = '100000000000000000000000000000000';
 
-    // Initial mint for Frax and DAI (10,000,000)
+    // Initial mint for CEuro and CUSD (10,000,000)
     const initialMint = '10000000000000000000000000';
 
-    // DAI bond BCV
-    const daiBondBCV = '369';
+    // CUSD bond BCV
+    const cUsdBondBCV = '369';
 
-    // Frax bond BCV
-    const fraxBondBCV = '690';
+    // CEuro bond BCV
+    const cEuroBondBCV = '690';
 
     // Bond vesting length in blocks. 33110 ~ 5 days
     const bondVestingLength = '33110';
@@ -62,22 +62,22 @@ async function main() {
     const TELO = await ethers.getContractFactory('TelestoERC20Token');
     const telo = await TELO.deploy();
 
-    // Deploy DAI
-    const DAI = await ethers.getContractFactory('DAI');
-    const dai = await DAI.deploy( 0 );
+    // Deploy CUSD
+    const CUSD = await ethers.getContractFactory('CUSD');
+    const cUsd = await CUSD.deploy( 0 );
 
-    // Deploy Frax
-    const Frax = await ethers.getContractFactory('FRAX');
-    const frax = await Frax.deploy( 0 );
+    // Deploy CEuro
+    const CEuro = await ethers.getContractFactory('CEURO');
+    const cEuro = await CEuro.deploy( 0 );
 
-    // Deploy 10,000,000 mock DAI and mock Frax
-    await dai.mint( deployer.address, initialMint );
-    await frax.mint( deployer.address, initialMint );
+    // Deploy 10,000,000 mock CUSD and mock CEuro
+    await cUsd.mint( deployer.address, initialMint );
+    await cEuro.mint( deployer.address, initialMint );
 
     // Deploy treasury
     //@dev changed function in treaury from 'valueOf' to 'valueOfToken'... solidity function was coflicting w js object property name
     const Treasury = await ethers.getContractFactory('MockTelestoTreasury'); 
-    const treasury = await Treasury.deploy( telo.address, dai.address, frax.address, 0 );
+    const treasury = await Treasury.deploy( telo.address, cUsd.address, cEuro.address, 0 );
 
     // Deploy bonding calc
     const TelestoBondingCalculator = await ethers.getContractFactory('TelestoBondingCalculator');
@@ -103,29 +103,29 @@ async function main() {
     const StakingHelper = await ethers.getContractFactory('StakingHelper');
     const stakingHelper = await StakingHelper.deploy(staking.address, telo.address);
 
-    // Deploy DAI bond
+    // Deploy CUSD bond
     //@dev changed function call to Treasury of 'valueOf' to 'valueOfToken' in BondDepository due to change in Treausry contract
-    const DAIBond = await ethers.getContractFactory('MockTelestoBondDepository');
-    const daiBond = await DAIBond.deploy(telo.address, dai.address, treasury.address, MockDAO.address, zeroAddress);
+    const CUSDBond = await ethers.getContractFactory('MockTelestoBondDepository');
+    const cUsdBond = await CUSDBond.deploy(telo.address, cUsd.address, treasury.address, MockDAO.address, zeroAddress);
 
-    // Deploy Frax bond
+    // Deploy CEuro bond
     //@dev changed function call to Treasury of 'valueOf' to 'valueOfToken' in BondDepository due to change in Treausry contract
-    const FraxBond = await ethers.getContractFactory('MockTelestoBondDepository');
-    const fraxBond = await FraxBond.deploy(telo.address, frax.address, treasury.address, MockDAO.address, zeroAddress);
+    const CEuroBond = await ethers.getContractFactory('MockTelestoBondDepository');
+    const cEuroBond = await CEuroBond.deploy(telo.address, cEuro.address, treasury.address, MockDAO.address, zeroAddress);
 
-    // queue and toggle DAI and Frax bond reserve depositor
-    await treasury.queue('0', daiBond.address);
-    await treasury.queue('0', fraxBond.address);
-    await treasury.toggle('0', daiBond.address, zeroAddress);
-    await treasury.toggle('0', fraxBond.address, zeroAddress);
+    // queue and toggle CUSD and CEuro bond reserve depositor
+    await treasury.queue('0', cUsdBond.address);
+    await treasury.queue('0', cEuroBond.address);
+    await treasury.toggle('0', cUsdBond.address, zeroAddress);
+    await treasury.toggle('0', cEuroBond.address, zeroAddress);
 
-    // Set DAI and Frax bond terms
-    await daiBond.initializeBondTerms(daiBondBCV, bondVestingLength, minBondPrice, maxBondPayout, bondFee, maxBondDebt, intialBondDebt);
-    await fraxBond.initializeBondTerms(fraxBondBCV, bondVestingLength, minBondPrice, maxBondPayout, bondFee, maxBondDebt, intialBondDebt);
+    // Set CUSD and CEuro bond terms
+    await cUsdBond.initializeBondTerms(cUsdBondBCV, bondVestingLength, minBondPrice, maxBondPayout, bondFee, maxBondDebt, intialBondDebt);
+    await cEuroBond.initializeBondTerms(cEuroBondBCV, bondVestingLength, minBondPrice, maxBondPayout, bondFee, maxBondDebt, intialBondDebt);
 
-    // Set staking for DAI and Frax bond
-    await daiBond.setStaking(staking.address, stakingHelper.address);
-    await fraxBond.setStaking(staking.address, stakingHelper.address);
+    // Set staking for CUSD and CEuro bond
+    await cUsdBond.setStaking(staking.address, stakingHelper.address);
+    await cEuroBond.setStaking(staking.address, stakingHelper.address);
 
     // Initialize sTELO and set the index
     await sTELO.initialize(staking.address);
@@ -153,34 +153,34 @@ async function main() {
     await treasury.queue('4', deployer.address, );
     await treasury.toggle('4', deployer.address, zeroAddress);
 
-    // Approve the treasury to spend DAI and Frax
-    await dai.approve(treasury.address, largeApproval );
-    await frax.approve(treasury.address, largeApproval );
+    // Approve the treasury to spend CUSD and CEuro
+    await cUsd.approve(treasury.address, largeApproval );
+    await cEuro.approve(treasury.address, largeApproval );
 
-    // Approve dai and frax bonds to spend deployer's DAI and Frax
-    await dai.approve(daiBond.address, largeApproval );
-    await frax.approve(fraxBond.address, largeApproval );
+    // Approve cUsd and cEuro bonds to spend deployer's CUSD and CEuro
+    await cUsd.approve(cUsdBond.address, largeApproval );
+    await cEuro.approve(cEuroBond.address, largeApproval );
 
     // Approve staking and staking helper contact to spend deployer's TELO
     await telo.approve(staking.address, largeApproval);
     await telo.approve(stakingHelper.address, largeApproval);
 
-    // Deposit 9,000,000 DAI to treasury, 600,000 TELO gets minted to deployer and 8,400,000 are in treasury as excesss reserves
-    await treasury.deposit('9000000000000000000000000', dai.address, '8400000000000000');
+    // Deposit 9,000,000 CUSD to treasury, 600,000 TELO gets minted to deployer and 8,400,000 are in treasury as excesss reserves
+    await treasury.deposit('9000000000000000000000000', cUsd.address, '8400000000000000');
 
-    // Deposit 5,000,000 Frax to treasury, all is profit and goes as excess reserves
-    await treasury.deposit('5000000000000000000000000', frax.address, '5000000000000000');
+    // Deposit 5,000,000 CEuro to treasury, all is profit and goes as excess reserves
+    await treasury.deposit('5000000000000000000000000', cEuro.address, '5000000000000000');
 
     // Stake TELO through helper
     await stakingHelper.stake('100000000000');
 
-    // Bond 1,000 TELO and Frax in each of their bonds
-    await daiBond.deposit('1000000000000000000000', '60000', deployer.address );
-    await fraxBond.deposit('1000000000000000000000', '60000', deployer.address );
+    // Bond 1,000 TELO and CEuro in each of their bonds
+    await cUsdBond.deposit('1000000000000000000000', '60000', deployer.address );
+    await cEuroBond.deposit('1000000000000000000000', '60000', deployer.address );
 
     console.log( "TELO: " + telo.address );
-    console.log( "DAI: " + dai.address );
-    console.log( "Frax: " + frax.address );
+    console.log( "CUSD: " + cUsd.address );
+    console.log( "CEuro: " + cEuro.address );
     console.log( "Treasury: " + treasury.address );
     console.log( "Calc: " + telestoBondingCalculator.address );
     console.log( "Staking: " + staking.address );
@@ -188,8 +188,8 @@ async function main() {
     console.log( "Distributor " + distributor.address);
     console.log( "Staking Wawrmup " + stakingWarmup.address);
     console.log( "Staking Helper " + stakingHelper.address);
-    console.log("DAI Bond: " + daiBond.address);
-    console.log("Frax Bond: " + fraxBond.address);
+    console.log("CUSD Bond: " + cUsdBond.address);
+    console.log("CEuro Bond: " + cEuroBond.address);
 }
 
 main()

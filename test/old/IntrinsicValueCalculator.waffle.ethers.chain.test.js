@@ -20,8 +20,8 @@
 //     let deployer;
 //     let treasury;
 
-//     let DAITokenContract;
-//     let dai;
+//     let CUSDTokenContract;
+//     let cUsd;
 
 //     let TelestoERC20TOkenContract;
 //     let oly;
@@ -37,13 +37,13 @@
 //           treasury
 //         ] = await ethers.getSigners();
 
-//         console.log( "Test::IntrinsicValueCalculator::beforeEach:01 Loading DAI." );
-//         DAITokenContract = await ethers.getContractFactory("DAI");
+//         console.log( "Test::IntrinsicValueCalculator::beforeEach:01 Loading CUSD." );
+//         CUSDTokenContract = await ethers.getContractFactory("CUSD");
 //         //Add check for events
-//         console.log( "Test::IntrinsicValueCalculator::beforeEach:02 Deploying DAI." );
-//         dai = await DAITokenContract.connect( deployer ).deploy( 1 );
-//         // await dai.deployed();
-//         console.log( "Test::IntrinsicValueCalculator:beforeEach:03 DAI address is %s,", dai.address );
+//         console.log( "Test::IntrinsicValueCalculator::beforeEach:02 Deploying CUSD." );
+//         cUsd = await CUSDTokenContract.connect( deployer ).deploy( 1 );
+//         // await cUsd.deployed();
+//         console.log( "Test::IntrinsicValueCalculator:beforeEach:03 CUSD address is %s,", cUsd.address );
 
 //         console.log( "Test::IntrinsicValueCalculator:beforeEach:04 Loading TelestoERC20Token." );
 //         TelestoERC20TOkenContract = await ethers.getContractFactory("TelestoERC20TOken");
@@ -51,7 +51,7 @@
 //         console.log( "Test::IntrinsicValueCalculator::beforeEach:05 Deploying TelestoERC20Token." );
 //         oly = await TelestoERC20TOkenContract.connect( deployer ).deploy();
 //         // await oly.deployed();
-//         console.log( "Test::IntrinsicValueCalculator:beforeEach:03 DAI address is %s,", oly.address );
+//         console.log( "Test::IntrinsicValueCalculator:beforeEach:03 CUSD address is %s,", oly.address );
 
 //         console.log( "Test::IntrinsicValueCalculator::beforeEach:06 Loading IntrinsicPriceCalculator." );
 //         IntrinsicValueCalculatorContract = await ethers.getContractFactory("IntrinsicValueCalculator");
@@ -59,7 +59,7 @@
 //         console.log( "Test::IntrinsicValueCalculator::beforeEach:07 Deploying IntrinsicValueCalculator." );
 //         ivcalc = await IntrinsicValueCalculatorContract.connect( deployer ).deploy();
 //         // await oivcalc.deployed();
-//         console.log( "Test::IntrinsicValueCalculator:beforeEach:08 DAI address is %s,", ivcalc.address );
+//         console.log( "Test::IntrinsicValueCalculator:beforeEach:08 CUSD address is %s,", ivcalc.address );
 //       }
 //     );
 
@@ -77,16 +77,16 @@
 //             // await expect( () => oly.connect(deployer).mint( treasury.address, ethers.utils.parseUnits( String( MILLION ), "ether" ) ) )
 //             //   .to.changeTokenBalance( oly, treasury, ethers.utils.parseUnits( String( MILLION ), "ether" ) );
             
-//             console.log( "Test::IntrinsicValueCalculator::OLYIntrinsicCalculatorDeployment:DeploymentSuccess:03 Minting 1,000,000 DAI to treasury." );
-//             await dai.connect(deployer).mint( treasury.address, ethers.utils.parseUnits( String( MILLION ), "ether" ) );
+//             console.log( "Test::IntrinsicValueCalculator::OLYIntrinsicCalculatorDeployment:DeploymentSuccess:03 Minting 1,000,000 CUSD to treasury." );
+//             await cUsd.connect(deployer).mint( treasury.address, ethers.utils.parseUnits( String( MILLION ), "ether" ) );
 
-//             console.log( "Test::IntrinsicValueCalculator::OLYIntrinsicCalculatorDeployment:DeploymentSuccess:04 Checking tresury DAI balance." );
-//             expect( await dai.balanceOf( treasury.address ) ).to.equal( ethers.utils.parseUnits( String( MILLION ), "ether" ) );
-//             // await expect( () => dai.connect(deployer).mint( treasury.address, ethers.utils.parseUnits( String( MILLION ), "ether" ) ) )
-//             //   .to.changeTokenBalance( dai, treasury, ethers.utils.parseUnits( String( MILLION ), "ether" ) );
+//             console.log( "Test::IntrinsicValueCalculator::OLYIntrinsicCalculatorDeployment:DeploymentSuccess:04 Checking tresury CUSD balance." );
+//             expect( await cUsd.balanceOf( treasury.address ) ).to.equal( ethers.utils.parseUnits( String( MILLION ), "ether" ) );
+//             // await expect( () => cUsd.connect(deployer).mint( treasury.address, ethers.utils.parseUnits( String( MILLION ), "ether" ) ) )
+//             //   .to.changeTokenBalance( cUsd, treasury, ethers.utils.parseUnits( String( MILLION ), "ether" ) );
 
 //             console.log( "Test::IntrinsicValueCalculator::OLYIntrinsicCalculatorDeployment:DeploymentSuccess:05 Checking OLY Intrinsic Price." );
-//             expect( await ivcalc.getIntrinsicValue( oly.address, dai.address, treasury.address) ).to.equal( ONE );
+//             expect( await ivcalc.getIntrinsicValue( oly.address, cUsd.address, treasury.address) ).to.equal( ONE );
 //           }
 //         );
 //       }
