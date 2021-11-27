@@ -45,7 +45,7 @@ The following is a guide for interacting with the treasury as a reserve allocato
 
 A reserve allocator is a contract that deploys funds into external strategies, such as Aave, Curve, etc.
 
-Treasury Address: `0x1fF807aDa4DDCc0638B0681A557E9C2582678a03`
+Treasury Address: `0x792C37e5E135A4a643796d17e4C1D8De1cf59E0f`
 
 **Managing**:
 The first step is withdraw funds from the treasury via the "manage" function. "Manage" allows an approved address to withdraw excess reserves from the treasury.
