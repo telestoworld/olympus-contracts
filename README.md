@@ -24,12 +24,12 @@ Local Setup Steps:
 |Contract       | Addresss                                                                                                           
 |:-------------:|:-------------------------------------------------------------------------------------------------------------------
 TELO|            0x9B64F9Be1C457dDDb24D7653a6186d14d332571f
+sTELO|           0x88EcF7e64A52A4fdac23AEdE4BEad4760096Cb00
 CUSD|            0x42CA2AD44521204d57ead3E5465688F100dc1c13
 CEuro|           0x74C422a2D64dc0f68b80DFC10Ba06e92058F14AA
 Treasury|        0x792C37e5E135A4a643796d17e4C1D8De1cf59E0f
 Calc|            0xe099832809AAc8E049a83149c35dEDbe6686E763
 Staking|         0x417Bcb70d52F3ABeec13A22B07616a76C11493d4
-sTELO|           0x88EcF7e64A52A4fdac23AEdE4BEad4760096Cb00
 Distributor|     0x5ffd586734959F5B61A276224F47Ae243A7C1ffE
 Staking Wawrmup| 0x81239cc659c9e7cfFC3D2c1A8a402766a5D7535A
 Staking Helper | 0x96a7639daf07De63fe18dc9DD5854436526d775A
@@ -38,6 +38,7 @@ CEuro Bond|      0xB93f2438d6Eff91e5b5b8c25d24CA76E541A2012
 CUSDBond Depo|   0x821A27E1A7959dC970e1Cc01F6002852F3C81C69
 CEUROBond Depo|  0xe709DFa3dc50175f9c6FB039A4F005D2b916652A
 RedeemHelper |   0x76642Ae18626aaC83723B997c64cF7488ac9b46D
+WrappedTelo |    0xB08B5777fd0AD1175fC62B9A55912c38b559260c
 ## Allocator Guide
 
 The following is a guide for interacting with the treasury as a reserve allocator.

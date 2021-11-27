@@ -31,7 +31,8 @@ module.exports = {
     },
     alfajores: {
       url: "https://alfajores-forno.celo-testnet.org",
-      accounts: [`0x${PRIVATE_KEY}`]
+      accounts: [`0x${PRIVATE_KEY}`],
+      chainId: 44787
     },
     binance: {
       url: "https://bsc-dataseed1.binance.org",
