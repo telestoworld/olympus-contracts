@@ -7,9 +7,9 @@ const { ethers } = require("hardhat");
 
 async function main() {
 
-    const [deployer, MockDAO] = await ethers.getSigners();
+    const [deployer] = await ethers.getSigners();
     console.log('Deploying contracts with the account: ' + deployer.address);
-
+    const MockDAO = deployer;
     // Initial staking index
     const initialIndex = '7675210820';
 
@@ -61,52 +61,70 @@ async function main() {
     // Deploy TELO
     const TELO = await ethers.getContractFactory('TelestoERC20Token');
     const telo = await TELO.deploy();
-
+    console.log("Deployed Telesto ERC20 to address")
     // Deploy CUSD
     const CUSD = await ethers.getContractFactory('CUSD');
-    const cUsd = await CUSD.deploy( 0 );
+    const cUsd = await CUSD.deploy();
+    console.log("Deployed Celo USD")
 
     // Deploy CEuro
     const CEuro = await ethers.getContractFactory('CEURO');
-    const cEuro = await CEuro.deploy( 0 );
+    const cEuro = await CEuro.deploy();
+    console.log("Deployed CELO EURO to address")
 
     // Deploy 10,000,000 mock CUSD and mock CEuro
-    await cUsd.mint( deployer.address, initialMint );
-    await cEuro.mint( deployer.address, initialMint );
+    await cUsd.mint(deployer.address, initialMint);
+    console.log("MONEY PRINTER GO BRRRR PRINTED CUSD TO YOUR ADDRESS :", initialMint)
+
+    await cEuro.mint(deployer.address, initialMint);
+    console.log("Le Moneys GO Le BRRRR PRINTED CEURO TO YOUR ADDRESS :", initialMint)
 
     // Deploy treasury
     //@dev changed function in treaury from 'valueOf' to 'valueOfToken'... solidity function was coflicting w js object property name
-    const Treasury = await ethers.getContractFactory('MockTelestoTreasury'); 
-    const treasury = await Treasury.deploy( telo.address, cUsd.address, cEuro.address, 0 );
+    const Treasury = await ethers.getContractFactory('MockTelestoTreasury');
+
+    const treasury = await Treasury.deploy(telo.address, cUsd.address, cEuro.address, 0);
+    console.log("Deployed Mock Treasury :")
+
 
     // Deploy bonding calc
     const TelestoBondingCalculator = await ethers.getContractFactory('TelestoBondingCalculator');
-    const telestoBondingCalculator = await TelestoBondingCalculator.deploy( telo.address );
+    const telestoBondingCalculator = await TelestoBondingCalculator.deploy(telo.address);
+    console.log("Deployed Bonding Calculator ")
 
     // Deploy staking distributor
     const Distributor = await ethers.getContractFactory('Distributor');
     const distributor = await Distributor.deploy(treasury.address, telo.address, epochLengthInBlocks, firstEpochBlock);
+    console.log("Deployed Distributor :", distributor.address)
 
     // Deploy sTELO
     const STELO = await ethers.getContractFactory('sTelesto');
     const sTELO = await STELO.deploy();
+    console.log("Deployed Staked Telesto :", sTELO.address)
 
     // Deploy Staking
     const Staking = await ethers.getContractFactory('TelestoStaking');
-    const staking = await Staking.deploy( telo.address, sTELO.address, epochLengthInBlocks, firstEpochNumber, firstEpochBlock );
+    const staking = await Staking.deploy(telo.address, sTELO.address, epochLengthInBlocks, firstEpochNumber, firstEpochBlock);
+    console.log("Deployed TelestoStaking :", staking.address)
 
     // Deploy staking warmpup
     const StakingWarmpup = await ethers.getContractFactory('StakingWarmup');
     const stakingWarmup = await StakingWarmpup.deploy(staking.address, sTELO.address);
+    console.log("Deployed StakingWarmup :", stakingWarmup.address)
 
+    console.log("starting to deploy stakingHelper with params:", staking.address,telo.address)
     // Deploy staking helper
     const StakingHelper = await ethers.getContractFactory('StakingHelper');
     const stakingHelper = await StakingHelper.deploy(staking.address, telo.address);
+    console.log("Deployed stakingHelper :", stakingHelper.address)
 
     // Deploy CUSD bond
     //@dev changed function call to Treasury of 'valueOf' to 'valueOfToken' in BondDepository due to change in Treausry contract
     const CUSDBond = await ethers.getContractFactory('MockTelestoBondDepository');
+    console.log("CUSD BOND PARAMS:",(telo.address, cUsd.address, treasury.address, MockDAO.address, zeroAddress));
+
     const cUsdBond = await CUSDBond.deploy(telo.address, cUsd.address, treasury.address, MockDAO.address, zeroAddress);
+    console.log("Deployed cUsdBond :", cUsdBond.address)
 
     // Deploy CEuro bond
     //@dev changed function call to Treasury of 'valueOf' to 'valueOfToken' in BondDepository due to change in Treausry contract
@@ -150,16 +168,16 @@ async function main() {
     await treasury.toggle('0', deployer.address, zeroAddress);
 
     // queue and toggle liquidity depositor
-    await treasury.queue('4', deployer.address, );
+    await treasury.queue('4', deployer.address,);
     await treasury.toggle('4', deployer.address, zeroAddress);
 
     // Approve the treasury to spend CUSD and CEuro
-    await cUsd.approve(treasury.address, largeApproval );
-    await cEuro.approve(treasury.address, largeApproval );
+    await cUsd.approve(treasury.address, largeApproval);
+    await cEuro.approve(treasury.address, largeApproval);
 
     // Approve cUsd and cEuro bonds to spend deployer's CUSD and CEuro
-    await cUsd.approve(cUsdBond.address, largeApproval );
-    await cEuro.approve(cEuroBond.address, largeApproval );
+    await cUsd.approve(cUsdBond.address, largeApproval);
+    await cEuro.approve(cEuroBond.address, largeApproval);
 
     // Approve staking and staking helper contact to spend deployer's TELO
     await telo.approve(staking.address, largeApproval);
@@ -175,19 +193,19 @@ async function main() {
     await stakingHelper.stake('100000000000');
 
     // Bond 1,000 TELO and CEuro in each of their bonds
-    await cUsdBond.deposit('1000000000000000000000', '60000', deployer.address );
-    await cEuroBond.deposit('1000000000000000000000', '60000', deployer.address );
+    await cUsdBond.deposit('1000000000000000000000', '60000', deployer.address);
+    await cEuroBond.deposit('1000000000000000000000', '60000', deployer.address);
 
-    console.log( "TELO: " + telo.address );
-    console.log( "CUSD: " + cUsd.address );
-    console.log( "CEuro: " + cEuro.address );
-    console.log( "Treasury: " + treasury.address );
-    console.log( "Calc: " + telestoBondingCalculator.address );
-    console.log( "Staking: " + staking.address );
-    console.log( "sTELO: " + sTELO.address );
-    console.log( "Distributor " + distributor.address);
-    console.log( "Staking Wawrmup " + stakingWarmup.address);
-    console.log( "Staking Helper " + stakingHelper.address);
+    console.log("TELO: " + telo.address);
+    console.log("CUSD: " + cUsd.address);
+    console.log("CEuro: " + cEuro.address);
+    console.log("Treasury: " + treasury.address);
+    console.log("Calc: " + telestoBondingCalculator.address);
+    console.log("Staking: " + staking.address);
+    console.log("sTELO: " + sTELO.address);
+    console.log("Distributor " + distributor.address);
+    console.log("Staking Wawrmup " + stakingWarmup.address);
+    console.log("Staking Helper " + stakingHelper.address);
     console.log("CUSD Bond: " + cUsdBond.address);
     console.log("CEuro Bond: " + cEuroBond.address);
 }
@@ -197,4 +215,4 @@ main()
     .catch(error => {
         console.error(error);
         process.exit(1);
-})
+    })
