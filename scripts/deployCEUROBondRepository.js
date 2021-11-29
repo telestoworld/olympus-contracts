@@ -20,7 +20,7 @@ async function main() {
 
     await cvxBond.pushManagement(policy);
 
-    console.log("Bond: CEURO" + cvxBond.address);
+    console.log("Bond CEURO " + cvxBond.address);
 }
 
 main()
