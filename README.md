@@ -16,7 +16,7 @@ Local Setup Steps:
 
 
 ## 🤨 How it all works
-![High Level Contract Interactions](https://c.tenor.com/KOwL-etspd8AAAAM/magic-shia-labeouf.gif)
+![High Level Contract Interactions](https://github.com/telestoworld/treasury-contracts/blob/Version-1.2/docs/diagram.png?raw=true)
 
 
 
