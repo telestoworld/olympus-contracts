@@ -16,7 +16,7 @@ Local Setup Steps:
 
 
 ## 🤨 How it all works
-![High Level Contract Interactions](https://user-images.githubusercontent.com/46767991/145517347-5038bf43-a28c-4cf3-879f-d7b6e31ce6cd.png)
+![High Level Contract Interactions](https://user-images.githubusercontent.com/46767991/145518452-d3d0c1b8-6988-4bdf-80e1-3c96cdb19316.png)
 
 
 
