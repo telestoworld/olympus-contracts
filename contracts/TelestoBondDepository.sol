@@ -392,7 +392,7 @@ interface IStakingHelper {
     function stake( uint _amount, address _recipient ) external;
 }
 
-contract TelestoCVXBondDepository is Ownable {
+contract TelestoBondDepository is Ownable {
 
     using FixedPoint for *;
     using SafeERC20 for IERC20;
