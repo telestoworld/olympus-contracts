@@ -16,7 +16,7 @@ Local Setup Steps:
 
 
 ## 🤨 How it all works
-![High Level Contract Interactions](https://github.com/telestoworld/treasury-contracts/blob/Version-1.2/docs/diagram.png?raw=true)
+![High Level Contract Interactions](https://user-images.githubusercontent.com/46767991/145517347-5038bf43-a28c-4cf3-879f-d7b6e31ce6cd.png)
 
 
 
