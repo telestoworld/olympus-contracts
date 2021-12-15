@@ -25,19 +25,20 @@ Local Setup Steps:
 |Contract       | Addresss                                                                                                           
 |:-------------:|:-------------------------------------------------------------------------------------------------------------------
 TELO| 0x5380C0aEDbc84dE7eC4968d650038bC22431643B
+sTELO| 0x3fbE106d29493D0B93CaF70910a05b00d4649612
 CUSD| 0x991CEF2341FccB6244eB5f712F5862035dd33a11
 CEuro| 0x428E7Fe9ddD583657E268099C7Fb8be6e7B61F5a
 CMC02|  0xF8cB093DDE6501c84d30711e050eA744Bb85BB61
 Treasury| 0x8dA432538f58EA8423c6D7DE783D113d6301b4FA
 Calc| 0x21459bad1747d1edFb8a2a8bf085b4d44cfD1A30
 Staking| 0x0be24afDA20209FDe1d71C280AcB2E82150d0B6C
-sTELO| 0x3fbE106d29493D0B93CaF70910a05b00d4649612
 Distributor| 0x90341A01192b4B1014e66f8a370F5DD7042BcEe2
 Staking Wawrmup| 0x977cA6BbC7Bd1d6e51b2b7A437C12D7a23b47c69
 Staking Helper| 0xf46aDB112f9819481412E20D5172B7dfe2bc9f9b
 
 RedeemHelper |   0xF286a8474A86DA09327455D911008ff4e1D5138F
 WrappedTelo |    0xA4d4b39A73a4688d88F02d2d73164409a35257eF
+CMC02 Bond | 0x614fA71cBF00c8Bff4d0B1C3E43740bDfDf5360b
 ## Allocator Guide
 
 The following is a guide for interacting with the treasury as a reserve allocator.
