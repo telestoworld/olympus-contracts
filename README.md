@@ -23,31 +23,27 @@ Local Setup Steps:
 ## Alfajore Contracts & Addresses
 |Contract       | Addresss                                                                                                           
 |:-------------:|:-------------------------------------------------------------------------------------------------------------------
-TELO|            0x9B64F9Be1C457dDDb24D7653a6186d14d332571f
-sTELO|           0x88EcF7e64A52A4fdac23AEdE4BEad4760096Cb00
-CUSD|            0x42CA2AD44521204d57ead3E5465688F100dc1c13
-CEuro|           0x74C422a2D64dc0f68b80DFC10Ba06e92058F14AA
-CMC02|           0xFEfb18f20C7548b72FDdBe4b70d07ee2ab63F60E
-Treasury|        0x792C37e5E135A4a643796d17e4C1D8De1cf59E0f
-Calc|            0xe099832809AAc8E049a83149c35dEDbe6686E763
-Staking|         0x417Bcb70d52F3ABeec13A22B07616a76C11493d4
-Distributor|     0x5ffd586734959F5B61A276224F47Ae243A7C1ffE
-Staking Wawrmup| 0x81239cc659c9e7cfFC3D2c1A8a402766a5D7535A
-Staking Helper | 0x96a7639daf07De63fe18dc9DD5854436526d775A
-CUSD Bond|       0x4Bf8eFEA933Bcd603EB03bBE98f19BE8c2e22439
-CEuro Bond|      0xB93f2438d6Eff91e5b5b8c25d24CA76E541A2012
-CUSDBond Depo|   0x821A27E1A7959dC970e1Cc01F6002852F3C81C69
-CMC02 Bond |     0x39abd8C055d95a64e81C60718f81e9422e4c8a39
-CEUROBond Depo|  0xe709DFa3dc50175f9c6FB039A4F005D2b916652A
-RedeemHelper |   0x76642Ae18626aaC83723B997c64cF7488ac9b46D
-WrappedTelo |    0xB08B5777fd0AD1175fC62B9A55912c38b559260c
+TELO| 0x5380C0aEDbc84dE7eC4968d650038bC22431643B
+CUSD| 0x991CEF2341FccB6244eB5f712F5862035dd33a11
+CEuro| 0x428E7Fe9ddD583657E268099C7Fb8be6e7B61F5a
+CMC02|  0xF8cB093DDE6501c84d30711e050eA744Bb85BB61
+Treasury| 0x8dA432538f58EA8423c6D7DE783D113d6301b4FA
+Calc| 0x21459bad1747d1edFb8a2a8bf085b4d44cfD1A30
+Staking| 0x0be24afDA20209FDe1d71C280AcB2E82150d0B6C
+sTELO| 0x3fbE106d29493D0B93CaF70910a05b00d4649612
+Distributor| 0x90341A01192b4B1014e66f8a370F5DD7042BcEe2
+Staking Wawrmup| 0x977cA6BbC7Bd1d6e51b2b7A437C12D7a23b47c69
+Staking Helper| 0xf46aDB112f9819481412E20D5172B7dfe2bc9f9b
+
+RedeemHelper |   0xF286a8474A86DA09327455D911008ff4e1D5138F
+WrappedTelo |    0xA4d4b39A73a4688d88F02d2d73164409a35257eF
 ## Allocator Guide
 
 The following is a guide for interacting with the treasury as a reserve allocator.
 
 A reserve allocator is a contract that deploys funds into external strategies, such as Aave, Curve, etc.
 
-Treasury Address: `0x792C37e5E135A4a643796d17e4C1D8De1cf59E0f`
+Treasury Address: `0x8dA432538f58EA8423c6D7DE783D113d6301b4FA`
 
 **Managing**:
 The first step is withdraw funds from the treasury via the "manage" function. "Manage" allows an approved address to withdraw excess reserves from the treasury.

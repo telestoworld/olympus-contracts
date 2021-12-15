@@ -602,7 +602,7 @@ interface IStakingHelper {
     function stake( uint _amount, address _recipient ) external;
 }
 
-contract StandardTelestoBondDepository is Ownable {
+contract DynamicTelestoBondDepository is Ownable {
 
     using FixedPoint for *;
     using SafeERC20 for IERC20;
