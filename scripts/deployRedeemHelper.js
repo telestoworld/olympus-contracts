@@ -7,7 +7,6 @@ async function main() {
     // Get contract factory for CVX bond
     const Helper = await ethers.getContractFactory('RedeemHelper');
 
-    // Deploy CVX bond
     const helper = await Helper.deploy();
 
     console.log("RedeemHelper: " + helper.address);

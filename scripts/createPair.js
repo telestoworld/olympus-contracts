@@ -6,7 +6,6 @@
 const { ethers } = require("hardhat");
 
 const UNISWAP_FACTORY_ADDRESS_ALFAJORES = "0x62d5b84bE28a183aBB507E125B384122D2C25fAE"
-const delay = ms => new Promise(res => setTimeout(res, ms));
 
 async function main() {
 
@@ -18,12 +17,13 @@ async function main() {
     const CUSD = await ethers.getContractFactory('CUSD');
     const cUsd = await CUSD.deploy();
     console.log(cUsd.address);
-    console.log(cUsd.address);
+    console.log(telo.address);
     const Uniswap = await ethers.getContractFactory('MockUniswapV2Factory');
     const uniswap = Uniswap.connect(deployer);
     const instance=uniswap.attach(UNISWAP_FACTORY_ADDRESS_ALFAJORES);
     const res=await instance.createPair(cUsd.address,telo.address)
-    await delay(100000);
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    await delay(50000);
     const telocUSDPair = await instance.callStatic.getPair(cUsd.address,telo.address)
     console.log("Pair created at",telocUSDPair,res)
 }
